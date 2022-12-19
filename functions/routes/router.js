@@ -1,23 +1,20 @@
 
 const express = require('express');
-const createAdCampaign = require('../controllers/campaign/create/CreateCampaign');
-const deleteCampaign = require('../controllers/campaign/delete/DeleteCampaign');
-const pauseCampaign = require('../controllers/campaign/pause/PauseCampaign');
+const createAdCampaign = require('../campaign/Create');
+const deleteCampaign = require('../campaign/Delete');
+const getAllCampaigns = require('../campaign/GetAll');
+const pauseCampaign = require('../campaign/Pause');
+const generateToken = require('../campaign/Token');
 const router = express.Router();
 
-router.post('/campaign/create', (req, res) => {
-    createAdCampaign(req.body);
-    res.json(req.body); 
-})
+router.post('/campaign/create', createAdCampaign);
 
-router.delete('/campaign/delete', (req, res) => {
-    deleteCampaign();
-    res.json(req.body); 
-})
+router.post('/campaign/delete/:id', deleteCampaign);
 
-router.post('/campaign/pause', (req, res) => {
-    pauseCampaign();
-    res.json(req.body); 
-})
+router.post('/campaign/pause/:id', pauseCampaign);
+
+router.post('/campaign/generate-token', generateToken);
+
+router.post('/campaign/get-all', getAllCampaigns);
 
 module.exports = router;

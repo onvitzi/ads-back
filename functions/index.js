@@ -10,4 +10,4 @@ app.use(cors({ origin: true }));
 
 app.use('/', require('./routes/router'))
 
-exports.widgets = functions.https.onRequest(app);
+exports.apiv1 = functions.https.onRequest(app);
