@@ -1,16 +1,12 @@
 const axios = require('axios');
+const Campaign = require('./models/CampaignModel');
 
 async function getAllCampaigns(req, res) {
   try {
-    console.log(req.body);
-    await axios.get(
-      `https://graph.facebook.com/v15.0/${process.env.ACCOUNT_ID}/campaigns?access_token=${process.env.TOKEN}`
-    );
-    res.json({
-      "message": "¡Listado de Campañas!"
-    });
-  } catch (error) {
-    res.json(JSON.stringify(error));
+    const tasks = await Campaign.find();
+    res.status(200).json(tasks);
+  } catch (err) {
+    res.status(500).json(err);
   }
 }
 
