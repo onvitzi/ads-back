@@ -11,10 +11,10 @@ router.post('/campaign/create', createAdCampaign);
 
 router.post('/campaign/delete/:id', deleteCampaign);
 
-router.post('/campaign/pause/:id', pauseCampaign);
+router.post('/campaign/pause/:campaignId/:id', pauseCampaign);
 
 router.post('/campaign/generate-token', generateToken);
 
-router.post('/campaign/get-all', getAllCampaigns);
+router.get('/campaign/get-all', getAllCampaigns);
 
 module.exports = router;
