@@ -9,7 +9,7 @@ async function getAllCampaigns(req, res) {
       await query.get().then((data) => {
         let docs = data.docs;
 
-        docs.map((doc) => {
+        docs.forEach((doc) => {
           const selectedData = {
             id: doc.data().id,
             nameCampaign: doc.data().nameCampaign,

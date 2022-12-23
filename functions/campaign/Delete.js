@@ -1,14 +1,22 @@
 const axios = require('axios');
+const admin = require('firebase-admin');
+const db = admin.firestore();
 
 async function deleteCampaign(req, res) {
   try {
-    let id = req.params.id;
+    const collectionRef = db.collection('campaigns').doc(req.params.id);
+
+    const documents = await collectionRef.get();
+
+    const id = documents._fieldsProto.campaignId.stringValue;
+
     await axios.delete(
-      `https://graph.facebook.com/v15.0/${id}?access_token=${process.env.TOKEN}`
+      `${process.env.API_VERSION}/${id}?access_token=${process.env.TOKEN}`
     );
-    res.json({
-      "message": "¡Campaña eliminada correctamente!"
+    const docRef = await db.collection("campaigns").doc(req.params.id).update({
+      status: "DELETED"
     });
+    res.status(200).json(docRef);
   } catch (error) {
     res.json(JSON.stringify(error));
   }

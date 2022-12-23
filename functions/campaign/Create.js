@@ -8,7 +8,7 @@ async function createAdCampaign(req, res) {
   try {
     let body = req.body;
     const savedCampaign = await axios.post(
-      `https://graph.facebook.com/v15.0/${process.env.ACCOUNT_ID}/campaigns?access_token=${process.env.TOKEN}&${querystring.stringify(body)}`
+      `${process.env.API_VERSION}/${process.env.ACCOUNT_ID}/campaigns?access_token=${process.env.TOKEN}&${querystring.stringify(body)}`
     );
     db.collection("campaigns").doc(`/${Date.now()}/`).create({
       id: Date.now(),
