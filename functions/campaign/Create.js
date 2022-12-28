@@ -15,8 +15,7 @@ async function createAdCampaign(req, res) {
       nameCampaign: req.body.name,
       objective: req.body.objective,
       status: req.body.status,
-      campaignId: savedCampaign.data.id,
-      active: 1
+      campaignId: savedCampaign.data.id
     });
     res.status(200).json(savedCampaign.data);
   } catch (error) {

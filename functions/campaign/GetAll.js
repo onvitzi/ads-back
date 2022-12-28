@@ -15,8 +15,7 @@ async function getAllCampaigns(req, res) {
             nameCampaign: doc.data().nameCampaign,
             objective: doc.data().objective,
             status: doc.data().status,
-            campaignId: doc.data().campaignId,
-            active: doc.data().active
+            campaignId: doc.data().campaignId
           };
 
           response.push(selectedData);
