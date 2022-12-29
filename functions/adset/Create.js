@@ -16,9 +16,9 @@ async function createAdset(req, res) {
         bid_amount: req.body.bid_amount,
         daily_budget: req.body.daily_budget,
         campaign_id: req.body.campaign_id,
-        targeting: {
-            "geo_locations": {"countries":["CO"]}
-        },
+        "targeting": {
+          "geo_locations": {countries:[req.body.targeting.geo_locations.countries]}
+      },
         start_time: req.body.start_time,
         end_time: req.body.end_time,
         status: req.body.status
@@ -32,8 +32,8 @@ async function createAdset(req, res) {
         bid_amount: req.body.bid_amount,
         daily_budget: req.body.daily_budget,
         campaign_id: req.body.campaign_id,
-        targeting: {
-            "geo_locations": {"countries":["COL"]}
+        "targeting": {
+            "geo_locations": {countries:[req.body.targeting.geo_locations.countries]}
         },
         start_time: req.body.start_time,
         status: req.body.status,

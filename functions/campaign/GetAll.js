@@ -4,24 +4,8 @@ const db = admin.firestore();
 async function getAllCampaigns(req, res) {
   try {
     let query = db.collection("campaigns");
-      let response = [];
-
-      await query.get().then((data) => {
-        let docs = data.docs;
-
-        docs.forEach((doc) => {
-          const selectedData = {
-            id: doc.data().id,
-            nameCampaign: doc.data().nameCampaign,
-            objective: doc.data().objective,
-            status: doc.data().status,
-            campaignId: doc.data().campaignId
-          };
-
-          response.push(selectedData);
-        });
-        return response;
-      });
+    const snapshot = await query.get();
+    const response = snapshot.docs.map(doc => doc.data());
       return res.status(200).send({ status: "Success", data: response });
   } catch (err) {
     res.status(500).send({ status: "Failed", msg: err });
