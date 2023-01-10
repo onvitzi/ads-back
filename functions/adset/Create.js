@@ -36,6 +36,7 @@ async function createAdset(req, res) {
             "geo_locations": {countries:[req.body.targeting.geo_locations.countries]}
         },
         start_time: req.body.start_time,
+        end_time: req.body.end_time,
         status: req.body.status,
         adsetId: savedAdset.data.id
     });

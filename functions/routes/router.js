@@ -17,7 +17,7 @@ const deleteAdCreative = require('../adcreative/Delete');
 const editAdCreative = require('../adcreative/Edit');
 const getAllAdCreatives = require('../adcreative/GetAll');
 const getOneAdCreative = require('../adcreative/GetOne');
-const fetchNextPage = require('../campaign/Pagination');
+const PaginationCampaigns = require('../campaign/Pagination');
 const router = express.Router();
 
 //CAMPAIGN
@@ -36,7 +36,7 @@ router.get('/campaign/get-all', getAllCampaigns);
 
 router.get('/campaign/get-one/:id', getOneCampaign);
 
-router.post('/campaign/pagination', fetchNextPage);
+router.get('/campaign/get', PaginationCampaigns);
 
 //ADSET
 

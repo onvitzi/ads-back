@@ -1,34 +1,22 @@
 const admin = require("firebase-admin");
 const db = admin.firestore();
 
-const query = db
-  .collection("campaigns")
-  .orderBy("nameCampaign", "asc")
-  .limit(10);
-  
-let currentPage = 1;
-let lastDocument = null;
+async function PaginationCampaigns(req, res) {
+  const page = req.query.page || 1;
+  const offset = (page - 1) * 10;
 
-async function fetchNextPage(req, res) {
-
-  const snapshot = await query.get();
-
-  const documents = snapshot.docs.map((doc) => doc.data());
-
-  if (currentPage > 1) {
-    db.collection("campaigns")
-    .orderBy("nameCampaign")
-    .startAfter(lastDocument)
-    .limit(10);
-  }
-
-  lastDocument = documents[documents.length - 1];
-
-  currentPage += 1;
-
-  console.log(lastDocument);
-
-  res.status(200).send({ status: "Success", data: documents });
+  db.collection('campaigns')
+    .limit(10)
+    .offset(offset)
+    .get()
+    .then((snapshot) => {
+      const items = snapshot.docs.map((doc) => doc.data());
+      return res.status(200).send({ status: "Success", data: items });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send({ error });
+    });
 }
 
-module.exports = fetchNextPage;
+module.exports = PaginationCampaigns;
